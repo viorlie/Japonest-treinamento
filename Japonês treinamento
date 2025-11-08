@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nihongo Sensei - Aprenda Japonês Gratuitamente</title>
+    <meta name="description" content="Aprenda japonês de forma eficaz com lições interativas, prática de conversação e exercícios divertidos. Método gratuito e acessível para todos.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #e62129;
+            --primary-dark: #b71c1c;
+            --secondary: #f5f5f5;
+            --accent: #ffcc00;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--secondary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--text);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover:after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1528164344705-47542687000d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .btn-large {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            color: var(--text);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 4px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        /* Lessons Section */
+        .lessons {
+            padding: 80px 0;
+            background-color: var(--secondary);
+        }
+        
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .lesson-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .lesson-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .lesson-content {
+            padding: 20px;
+        }
+        
+        .lesson-level {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .lesson-card h3 {
+            margin-bottom: 10px;
+        }
+        
+        .lesson-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Practice Section */
+        .practice {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .practice-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .practice-content {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .practice-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .practice-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .practice-content p {
+            margin-bottom: 25px;
+            color: var(--text-light);
+        }
+        
+        /* Quiz Section */
+        .quiz {
+            padding: 80px 0;
+            background-color: var(--secondary);
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-progress {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .quiz-option {
+            padding: 15px;
+            background: var(--secondary);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .quiz-option:hover {
+            background: #e0e0e0;
+        }
+        
+        .quiz-option.selected {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        /* Resources Section */
+        .resources {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .resource-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .resource-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .resource-card h3 {
+            margin-bottom: 10px;
+        }
+        
+        .resource-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--text);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: var(--white);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                text-align: center;
+                margin-top: 20px;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .practice-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span>日本語</span> Sensei
+            </a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#cursos">Cursos</a></li>
+                    <li><a href="#pratica">Prática</a></li>
+                    <li><a href="#quiz">Quiz</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Entrar</a>
+                <a href="#" class="btn btn-primary"><i class="fas fa-user-plus"></i> Cadastrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Aprenda Japonês de Forma Eficaz</h1>
+                <p>Domine o idioma japonês com nosso método inovador que combina lições interativas, prática de conversação e imersão cultural.</p>
+                <div class="hero-buttons">
+                    <a href="#cursos" class="btn btn-primary btn-large"><i class="fas fa-play-circle"></i> Começar Agora</a>
+                    <a href="#quiz" class="btn btn-accent btn-large"><i class="fas fa-eye"></i> Ver Demonstração</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Por Que Aprender Japonês Conosco?</h2>
+                <p>Nossa abordagem única combina tecnologia moderna com métodos de ensino comprovados</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Foco na Conversação</h3>
+                    <p>Aprenda a se comunicar efetivamente em situações reais com exercícios de fala e escuta.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Estrutura Progressiva</h3>
+                    <p>Do básico ao avançado, nosso currículo é cuidadosamente planejado para seu progresso contínuo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
+                    <h3>Aprendizado Interativo</h3>
+                    <p>Jogos, quizzes e atividades práticas tornam o aprendizado divertido e eficiente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Section -->
+    <section class="lessons" id="cursos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos Cursos</h2>
+                <p>Escolha o nível que melhor se adapta ao seu conhecimento atual</p>
+            </div>
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <div class="lesson-image" style="background-color: #ffcccb;"></div>
+                    <div class="lesson-content">
+                        <span class="lesson-level">Iniciante</span>
+                        <h3>Japonês Básico</h3>
+                        <p>Aprenda hiragana, katakana, saudações e frases essenciais para comunicação diária.</p>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-play"></i> Começar Curso</a>
+                    </div>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-image" style="background-color: #add8e6;"></div>
+                    <div class="lesson-content">
+                        <span class="lesson-level">Intermediário</span>
+                        <h3>Japonês Intermediário</h3>
+                        <p>Expanda seu vocabulário e domine estruturas gramaticais mais complexas.</p>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-play"></i> Começar Curso</a>
+                    </div>
+                </div>
+                <div class="lesson-card">
+                    <div class="lesson-image" style="background-color: #90ee90;"></div>
+                    <div class="lesson-content">
+                        <span class="lesson-level">Avançado</span>
+                        <h3>Japonês Avançado</h3>
+                        <p>Aprimore sua fluência com conversação avançada e compreensão de textos complexos.</p>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-play"></i> Começar Curso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Section -->
+    <section class="practice" id="pratica">
+        <div class="container practice-container">
+            <div class="practice-content">
+                <h2>Pratique Japonês Todos os Dias</h2>
+                <p>Nosso sistema de repetição espaçada garante que você revise o conteúdo no momento ideal para a memorização a longo prazo.</p>
+                <p>Com exercícios de escuta, fala, leitura e escrita, você desenvolve todas as habilidades necessárias para dominar o idioma.</p>
+                <a href="#" class="btn btn-primary btn-large"><i class="fas fa-rocket"></i> Experimente Agora</a>
+            </div>
+            <div class="practice-image"></div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz" id="quiz">
+        <div class="container">
+            <div class="section-title">
+                <h2>Teste Seu Conhecimento</h2>
+                <p>Responda ao quiz e descubra seu nível de japonês</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <h3>Quiz de Japonês</h3>
+                    <p>Pergunta <span id="current-question">1</span> de <span id="total-questions">5</span></p>
+                </div>
+                <div class="quiz-progress">
+                    <div class="quiz-progress-bar" id="quiz-progress"></div>
+                </div>
+                <div class="quiz-question" id="question-text">
+                    Como se diz "Olá" em japonês?
+                </div>
+                <div class="quiz-options" id="options-container">
+                    <div class="quiz-option" data-value="1">Konnichiwa</div>
+                    <div class="quiz-option" data-value="2">Arigatou</div>
+                    <div class="quiz-option" data-value="3">Sayonara</div>
+                    <div class="quiz-option" data-value="4">Ohayou</div>
+                </div>
+                <div class="quiz-navigation">
+                    <button class="btn btn-outline" id="prev-btn" disabled><i class="fas fa-arrow-left"></i> Anterior</button>
+                    <button class="btn btn-primary" id="next-btn">Próxima <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources" id="recursos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recursos Adicionais</h2>
+                <p>Ferramentas e materiais para complementar seu aprendizado</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-book"></i></div>
+                    <h3>Dicionário</h3>
+                    <p>Busque palavras em japonês com exemplos de uso e pronúncia.</p>
+                    <a href="#" class="btn btn-outline">Acessar</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-pen"></i></div>
+                    <h3>Prática de Escrita</h3>
+                    <p>Aprenda a escrever caracteres japoneses com exercícios guiados.</p>
+                    <a href="#" class="btn btn-outline">Acessar</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-headphones"></i></div>
+                    <h3>Áudio Lessons</h3>
+                    <p>Pratique sua compreensão auditiva com diálogos e narrações.</p>
+                    <a href="#" class="btn btn-outline">Acessar</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Monitor de Progresso</h3>
+                    <p>Acompanhe seu desenvolvimento e identifique áreas para melhorar.</p>
+                    <a href="#" class="btn btn-outline">Acessar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="sobre">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Nihongo Sensei</h3>
+                    <p>Aprenda japonês de forma eficiente e divertida com nossa plataforma especializada.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Cursos</h3>
+                    <ul>
+                        <li><a href="#">Japonês Básico</a></li>
+                        <li><a href="#">Japonês Intermediário</a></li>
+                        <li><a href="#">Japonês Avançado</a></li>
+                        <li><a href="#">Curso de Kanji</a></li>
+                        <li><a href="#">Preparação para JLPT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="#">Dicionário</a></li>
+                        <li><a href="#">Prática de Escrita</a></li>
+                        <li><a href="#">Exercícios de Pronúncia</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><a href="#">Suporte</a></li>
+                        <li><a href="#">Parcerias</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Nihongo Sensei. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para funcionalidades do site
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu mobile
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('nav ul');
+            
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('show');
+            });
+            
+            // Adicionar efeito de scroll suave para links de navegação
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Fechar menu mobile após clicar em um link
+                        if (navMenu.classList.contains('show')) {
+                            navMenu.classList.remove('show');
+                        }
+                    }
+                });
+            });
+            
+            // Quiz interativo
+            const quizData = [
+                {
+                    question: 'Como se diz "Olá" em japonês?',
+                    options: ['Konnichiwa', 'Arigatou', 'Sayonara', 'Ohayou'],
+                    correct: 1
+                },
+                {
+                    question: 'Qual é o significado de "Arigatou"?',
+                    options: ['Por favor', 'Obrigado', 'Desculpe', 'Bom dia'],
+                    correct: 2
+                },
+                {
+                    question: 'Como se diz "Sim" em japonês?',
+                    options: ['Iie', 'Hai', 'Chigau', 'Wakarimasu'],
+                    correct: 2
+                },
+                {
+                    question: 'Qual destes é um sistema de escrita japonês?',
+                    options: ['Kanji', 'Kana', 'Hangul', 'Hanzi'],
+                    correct: 1
+                },
+                {
+                    question: 'Como se diz "Eu não entendo" em japonês?',
+                    options: ['Wakarimasu', 'Wakarimasen', 'Shirimasen', 'Hai'],
+                    correct: 2
+                }
+            ];
+            
+            let currentQuestion = 0;
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const currentQuestionSpan = document.getElementById('current-question');
+            const totalQuestionsSpan = document.getElementById('total-questions');
+            const quizProgress = document.getElementById('quiz-progress');
+            
+            totalQuestionsSpan.textContent = quizData.length;
+            
+            function loadQuestion() {
+                const question = quizData[currentQuestion];
+                questionText.textContent = question.question;
+                optionsContainer.innerHTML = '';
+                
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('quiz-option');
+                    optionElement.textContent = option;
+                    optionElement.dataset.value = index + 1;
+                    optionElement.addEventListener('click', selectOption);
+                    optionsContainer.appendChild(optionElement);
+                });
+                
+                currentQuestionSpan.textContent = currentQuestion + 1;
+                quizProgress.style.width = `${((currentQuestion + 1) / quizData.length) * 100}%`;
+                
+                prevBtn.disabled = currentQuestion === 0;
+                nextBtn.textContent = currentQuestion === quizData.length - 1 ? 'Finalizar' : 'Próxima';
+            }
+            
+            function selectOption(e) {
+                const options = document.querySelectorAll('.quiz-option');
+                options.forEach(option => option.classList.remove('selected'));
+                e.target.classList.add('selected');
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion();
+                }
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                if (currentQuestion < quizData.length - 1) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    alert('Quiz finalizado! Em breve teremos mais funcionalidades.');
+                }
+            });
+            
+            loadQuestion();
+            
+            // Efeito de destaque no header ao rolar
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                } else {
+                    header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
